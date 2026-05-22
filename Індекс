@@ -1,0 +1,209 @@
+:root {
+  --bg: #0c0c0d;
+  --surface: #141416;
+  --border: #222226;
+  --accent: #e8ff47;
+  --accent-dim: rgba(232, 255, 71, 0.12);
+  --text-primary: #f0f0ee;
+  --text-muted: #555560;
+  --text-index: #2a2a30;
+  --font-display: "Syne", sans-serif;
+  --font-mono: "DM Mono", monospace;
+  --radius: 2px;
+  --transition: 200ms ease;
+}
+ 
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+html, body {
+  height: 100%;
+}
+ 
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+}
+ 
+/* ── Layout ─────────────────────────────────────────────────── */
+#root {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 80px 24px;
+}
+ 
+/* ── App wrapper ────────────────────────────────────────────── */
+.app {
+  width: 100%;
+  max-width: 680px;
+  animation: fadeUp 0.5s ease both;
+}
+ 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ── Header ─────────────────────────────────────────────────── */
+.app__header {
+  margin-bottom: 56px;
+}
+ 
+.app__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+ 
+.app__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+ 
+.app__title span {
+  color: var(--accent);
+}
+ 
+.app__meta {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.app__meta::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--border);
+}
+ 
+/* ── Todo List ──────────────────────────────────────────────── */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+ 
+/* ── Todo Item ──────────────────────────────────────────────── */
+.todo-item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  cursor: default;
+  transition: background var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+ 
+.todo-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-dim);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+ 
+.todo-item:hover::before {
+  opacity: 1;
+}
+ 
+.todo-item__index {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-index);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  padding-left: 2px;
+  transition: color var(--transition);
+}
+ 
+.todo-item:hover .todo-item__index {
+  color: var(--accent);
+}
+ 
+.todo-item__title {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+ 
+.todo-item__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background var(--transition);
+  margin-right: 4px;
+}
+ 
+.todo-item:hover .todo-item__dot {
+  background: var(--accent);
+}
+ 
+/* ── Footer ─────────────────────────────────────────────────── */
+.app__footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+ 
+.app__footer-badge {
+  background: var(--accent-dim);
+  border: 1px solid rgba(232, 255, 71, 0.2);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+ 
+/* ── Stagger animation for list items ──────────────────────── */
+.todo-item:nth-child(1)  { animation: slideIn 0.4s 0.10s ease both; }
+.todo-item:nth-child(2)  { animation: slideIn 0.4s 0.16s ease both; }
+.todo-item:nth-child(3)  { animation: slideIn 0.4s 0.22s ease both; }
+.todo-item:nth-child(4)  { animation: slideIn 0.4s 0.28s ease both; }
+.todo-item:nth-child(5)  { animation: slideIn 0.4s 0.34s ease both; }
+.todo-item:nth-child(6)  { animation: slideIn 0.4s 0.40s ease both; }
+.todo-item:nth-child(7)  { animation: slideIn 0.4s 0.46s ease both; }
+.todo-item:nth-child(8)  { animation: slideIn 0.4s 0.52s ease both; }
+.todo-item:nth-child(9)  { animation: slideIn 0.4s 0.58s ease both; }
+.todo-item:nth-child(10) { animation: slideIn 0.4s 0.64s ease both; }
+ 
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
